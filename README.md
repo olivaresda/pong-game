@@ -1,4 +1,4 @@
-# Retro Neon Pong - Edición Premium
+# Retro Neon Pong - Edición Premium - pong con fines academicos de como un agente construye desde antigravity
 
 Un juego clásico de Pong adaptado con una estética moderna Cyberpunk/Neón, físicas fluidas, efectos de partículas al impacto, efectos de sonido sintetizados mediante la API Web Audio y diferentes niveles de dificultad contra la CPU o modo multijugador local.
 
