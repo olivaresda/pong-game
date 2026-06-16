@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Neon Pong - Edición Premium</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="theme-cyberpunk">
+    <div class="app-container">
+        <header>
+            <h1 id="game-title">NEON PONG</h1>
+        </header>
+
+        <div class="game-layout">
+            <!-- Screen area -->
+            <div class="screen-container" id="screen-container">
+                <canvas id="gameCanvas" width="800" height="450"></canvas>
+
+                <!-- HUD Overlays -->
+                <div class="hud-overlay" id="hudOverlay">
+                    <h2 class="hud-title" id="hudTitle">NEON PONG</h2>
+                    <p class="hud-subtitle" id="hudSubtitle">Un juego clásico de Pong rediseñado con físicas modernas, efectos de partículas, sonido integrado y varios niveles de dificultad.</p>
+                    <button class="hud-btn-start" id="hudBtnStart">JUGAR</button>
+                    
+                    <div class="game-instructions" id="hudInstructions">
+                        <div class="instruction-player">
+                            <strong>Jugador 1 (Izquierda)</strong>
+                            <span>Mover: <span class="keycap">W</span> y <span class="keycap">S</span></span>
+                        </div>
+                        <div class="instruction-player" id="p2Instructions">
+                            <strong>Jugador 2 / CPU (Derecha)</strong>
+                            <span>Mover: <span class="keycap">▲</span> y <span class="keycap">▼</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar control panel -->
+            <aside class="controls-panel">
+                <div class="control-group">
+                    <div class="control-label">Modo de Juego</div>
+                    <div class="btn-group">
+                        <button class="active" id="btnModeVsCpu" data-mode="vs-cpu">VS CPU</button>
+                        <button id="btnModePvp" data-mode="pvp">2 JUG. (PVP)</button>
+                    </div>
+                </div>
+
+                <div class="control-group" id="difficultyGroup">
+                    <div class="control-label">Dificultad de CPU</div>
+                    <div class="btn-group">
+                        <button id="btnDiffEasy" data-diff="easy">FÁCIL</button>
+                        <button class="active" id="btnDiffMedium" data-diff="medium">MEDIO</button>
+                        <button id="btnDiffHard" data-diff="hard">DIFÍCIL</button>
+                        <button id="btnDiffImpossible" data-diff="impossible">IMPOSIBLE</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="control-label">Apariencia</div>
+                    <div class="btn-group">
+                        <button class="active" id="btnThemeCyber" data-theme="cyberpunk">NEON</button>
+                        <button id="btnThemeMatrix" data-theme="matrix">MATRIX</button>
+                        <button id="btnThemeAmber" data-theme="amber">ÁMBAR</button>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="toggle-switch">
+                        <span class="control-label" style="margin: 0;">Efectos de Sonido</span>
+                        <label class="switch">
+                            <input type="checkbox" id="soundToggle" checked>
+                            <span class="slider"></span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div style="margin-top: auto; padding-top: 15px; border-top: 1px solid rgba(255, 255, 255, 0.08); font-size: 0.75rem; color: var(--text-muted); text-align: center; line-height: 1.4;">
+                    Pausa / Reanuda con <span class="keycap" style="font-size: 0.65rem; padding: 1px 4px;">Espacio</span>
+                </div>
+            </aside>
+        </div>
+
+        <footer>
+            Creado con ❤️ para tu repositorio local de Git.
+        </footer>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
