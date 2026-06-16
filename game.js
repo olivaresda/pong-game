@@ -186,6 +186,7 @@ const ball = {
 
 let particles = [];
 const keys = {};
+let useMouseControl = false;
 
 // Helper to get CSS theme colors dynamically
 function updateColorsFromCSS() {
@@ -209,6 +210,24 @@ window.addEventListener('keydown', (e) => {
 window.addEventListener('keyup', (e) => {
     keys[e.key.toLowerCase()] = false;
     keys[e.key] = false;
+});
+
+// Setup Mouse Control listener
+canvas.addEventListener('mousemove', (e) => {
+    if (!useMouseControl || gameState !== 'playing') return;
+    
+    // Get mouse position relative to canvas container
+    const rect = canvas.getBoundingClientRect();
+    const relativeY = (e.clientY - rect.top) / rect.height;
+    
+    // Convert to logical canvas resolution (450px height)
+    const canvasY = relativeY * canvas.height;
+    
+    // Center the paddle on the mouse cursor
+    player1.y = canvasY - paddleHeight / 2;
+    
+    // Clamp to screen limits
+    player1.y = Math.max(0, Math.min(canvas.height - paddleHeight, player1.y));
 });
 
 // Setup Control Panel Handlers
@@ -248,6 +267,14 @@ themeButtons.forEach(item => {
 const soundToggle = document.getElementById('soundToggle');
 soundToggle.addEventListener('change', (e) => {
     sound.enabled = e.target.checked;
+});
+
+// Setup Mouse Control Toggle
+const mouseToggle = document.getElementById('mouseToggle');
+mouseToggle.addEventListener('change', (e) => {
+    useMouseControl = e.target.checked;
+    // Hide standard cursor when inside canvas during play
+    canvas.style.cursor = useMouseControl ? 'none' : 'default';
 });
 
 // Setup HUD overlay Play Button
@@ -382,15 +409,17 @@ function update() {
     // Refresh colors in case theme changed
     updateColorsFromCSS();
 
-    // 1. Move Player 1 (W/S keys)
-    const moveSpeed = 6;
-    if (keys['w']) {
-        player1.y -= moveSpeed;
+    // 1. Move Player 1 (W/S keys) - Only if mouse control is disabled
+    if (!useMouseControl) {
+        const moveSpeed = 6;
+        if (keys['w']) {
+            player1.y -= moveSpeed;
+        }
+        if (keys['s']) {
+            player1.y += moveSpeed;
+        }
+        player1.y = Math.max(0, Math.min(canvas.height - paddleHeight, player1.y));
     }
-    if (keys['s']) {
-        player1.y += moveSpeed;
-    }
-    player1.y = Math.max(0, Math.min(canvas.height - paddleHeight, player1.y));
 
     // 2. Move Player 2 (AI or Arrow Keys)
     if (gameMode === 'pvp') {
